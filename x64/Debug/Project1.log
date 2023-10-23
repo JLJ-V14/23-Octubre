@@ -1,0 +1,72 @@
+﻿  comprobar_lectura_datos.c
+  conversion_numeros.c
+  funciones_plataforma_dependiente.c
+  inicializacion_algoritmo.c
+  inicializar_csv.c
+  inicializar_posiciones.c
+  leer_entradas.c
+F:\Optimizacion23Octubre\Project1\Project1\leer_entradas.c(65,48): warning C4047: 'function': 'datos_csv_t **' differs in levels of indirection from 'datos_csv_t *'
+F:\Optimizacion23Octubre\Project1\Project1\leer_entradas.c(65,48): warning C4024: 'liberar_memoria_csv_individual': different types for formal and actual parameter 1
+F:\Optimizacion23Octubre\Project1\Project1\leer_entradas.c(99,44): warning C4047: 'function': 'datos_csv_t **' differs in levels of indirection from 'datos_csv_t *'
+F:\Optimizacion23Octubre\Project1\Project1\leer_entradas.c(99,44): warning C4024: 'liberar_memoria_csv_individual': different types for formal and actual parameter 1
+F:\Optimizacion23Octubre\Project1\Project1\leer_entradas.c(110,48): warning C4047: 'function': 'datos_csv_t **' differs in levels of indirection from 'datos_csv_t *'
+F:\Optimizacion23Octubre\Project1\Project1\leer_entradas.c(110,48): warning C4024: 'liberar_memoria_csv_individual': different types for formal and actual parameter 1
+F:\Optimizacion23Octubre\Project1\Project1\leer_entradas.c(151,46): warning C4047: 'function': 'wchar_t' differs in levels of indirection from 'unsigned short [2]'
+F:\Optimizacion23Octubre\Project1\Project1\leer_entradas.c(151,46): warning C4024: 'leer_csv': different types for formal and actual parameter 2
+  libcsv.c
+F:\Optimizacion23Octubre\Project1\Project1\libcsv.c(191,9): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\Optimizacion23Octubre\Project1\Project1\libcsv.c(192,9): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\Optimizacion23Octubre\Project1\Project1\libcsv.c(199,42): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\Optimizacion23Octubre\Project1\Project1\libcsv.c(367,21): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\Optimizacion23Octubre\Project1\Project1\libcsv.c(368,21): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\Optimizacion23Octubre\Project1\Project1\libcsv.c(373,25): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\Optimizacion23Octubre\Project1\Project1\libcsv.c(379,17): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\Optimizacion23Octubre\Project1\Project1\libcsv.c(414,21): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\Optimizacion23Octubre\Project1\Project1\libcsv.c(419,21): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\Optimizacion23Octubre\Project1\Project1\libcsv.c(420,21): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\Optimizacion23Octubre\Project1\Project1\libcsv.c(439,17): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\Optimizacion23Octubre\Project1\Project1\libcsv.c(443,17): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\Optimizacion23Octubre\Project1\Project1\libcsv.c(444,17): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  liberar_memoria.c
+  main.c
+  operaciones_csv.c
+  operaciones_fecha.c
+F:\Optimizacion23Octubre\Project1\Project1\operaciones_fecha.c(273,29): warning C4133: 'function': incompatible types - from 'datos_csv_t *' to 'datos_csv_algoritmo_t *'
+  operaciones_string.c
+  registrar_errores.c
+F:\Optimizacion23Octubre\Project1\Project1\registrar_errores.c(20,65): warning C4090: '=': different 'const' qualifiers
+  validaciones.c
+F:\Optimizacion23Octubre\Project1\Project1\validaciones.c(75,47): warning C4090: 'function': different 'const' qualifiers
+  verificar_baterias.c
+  verificar_datos_algoritmo.c
+F:\Optimizacion23Octubre\Project1\Project1\verificar_datos_algoritmo.c(186,41): warning C4133: 'function': incompatible types - from 'datos_csv_t *' to 'datos_csv_algoritmo_t *'
+  verificar_datos_terminales.c
+F:\Optimizacion23Octubre\Project1\Project1\verificar_datos_terminales.c(43,33): warning C4090: 'function': different 'const' qualifiers
+  verificar_entradas.c
+  verificar_precios.c
+F:\Optimizacion23Octubre\Project1\Project1\verificar_precios.c(55,15): warning C4047: 'initializing': 'datos_csv_t *' differs in levels of indirection from 'wchar_t ****'
+F:\Optimizacion23Octubre\Project1\Project1\verificar_precios.c(182,63): warning C4090: 'function': different 'const' qualifiers
+F:\Optimizacion23Octubre\Project1\Project1\verificar_precios.c(188,62): warning C4090: 'function': different 'const' qualifiers
+F:\Optimizacion23Octubre\Project1\Project1\verificar_precios.c(440,11): warning C4244: 'function': conversion from 'double' to 'int', possible loss of data
+F:\Optimizacion23Octubre\Project1\Project1\verificar_precios.c(505,16): warning C4133: 'function': incompatible types - from 'datos_csv_precio_t *' to 'const datos_csv_t *'
+F:\Optimizacion23Octubre\Project1\Project1\verificar_precios.c(532,58): warning C4133: 'function': incompatible types - from 'datos_csv_precio_t *' to 'datos_csv_algoritmo_t *'
+F:\Optimizacion23Octubre\Project1\Project1\verificar_precios.c(537,57): warning C4133: 'function': incompatible types - from 'datos_csv_precio_t *' to 'datos_csv_algoritmo_t *'
+F:\Optimizacion23Octubre\Project1\Project1\verificar_precios.c(543,56): warning C4133: 'function': incompatible types - from 'datos_csv_precio_t *' to 'datos_csv_algoritmo_t *'
+F:\Optimizacion23Octubre\Project1\Project1\verificar_precios.c(549,55): warning C4133: 'function': incompatible types - from 'datos_csv_precio_t *' to 'datos_csv_algoritmo_t *'
+F:\Optimizacion23Octubre\Project1\Project1\verificar_precios.c(632,32): warning C4133: 'function': incompatible types - from 'datos_csv_precio_t *' to 'const datos_csv_t *'
+F:\Optimizacion23Octubre\Project1\Project1\verificar_precios.c(632,53): warning C4133: 'function': incompatible types - from 'datos_csv_precio_t *' to 'const datos_csv_t *'
+F:\Optimizacion23Octubre\Project1\Project1\verificar_precios.c(636,71): warning C4133: 'function': incompatible types - from 'datos_csv_algoritmo_t *' to 'datos_csv_precio_t *'
+  Generating Code...
+  Compiling...
+  verificar_restricciones.c
+  verificar_vehiculos.c
+F:\Optimizacion23Octubre\Project1\Project1\verificar_vehiculos.c(73,11): warning C4047: 'function': 'wchar_t *const ' differs in levels of indirection from 'wchar_t *[512]'
+F:\Optimizacion23Octubre\Project1\Project1\verificar_vehiculos.c(73,11): warning C4024: 'swprintf': different types for formal and actual parameter 1
+F:\Optimizacion23Octubre\Project1\Project1\verificar_vehiculos.c(74,10): warning C4477: 'wprintf' : format string '%ls' requires an argument of type 'unsigned short *', but variadic argument 1 has type 'wchar_t **'
+F:\Optimizacion23Octubre\Project1\Project1\verificar_vehiculos.c(76,18): warning C4047: 'function': 'const char *' differs in levels of indirection from 'wchar_t *[512]'
+F:\Optimizacion23Octubre\Project1\Project1\verificar_vehiculos.c(76,18): warning C4024: 'registrar_error': different types for formal and actual parameter 1
+F:\Optimizacion23Octubre\Project1\Project1\verificar_vehiculos.c(237,52): warning C4133: 'function': incompatible types - from 'datos_csv_algoritmo_t *' to 'datos_csv_t *'
+F:\Optimizacion23Octubre\Project1\Project1\verificar_vehiculos.c(256,42): warning C4133: 'function': incompatible types - from 'datos_csv_vehiculos_t *' to 'datos_csv_t *'
+F:\Optimizacion23Octubre\Project1\Project1\verificar_vehiculos.c(259,38): warning C4133: 'function': incompatible types - from 'datos_csv_vehiculos_t *' to 'datos_csv_t *'
+  Generating Code...
+  Project1.vcxproj -> F:\Optimizacion23Octubre\Project1\x64\Debug\Project1.exe
