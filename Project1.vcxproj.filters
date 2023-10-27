@@ -81,6 +81,9 @@
     <ClCompile Include="verificar_vehiculos.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="verificar_conexiones_simultaneas.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -153,6 +156,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="verificar_vehiculos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verificar_conexiones_simultaneas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -143,6 +143,7 @@
     <ClCompile Include="registrar_errores.c" />
     <ClCompile Include="validaciones.c" />
     <ClCompile Include="verificar_baterias.c" />
+    <ClCompile Include="verificar_conexiones_simultaneas.c" />
     <ClCompile Include="verificar_datos_algoritmo.c" />
     <ClCompile Include="verificar_datos_terminales.c" />
     <ClCompile Include="verificar_entradas.c" />
@@ -169,6 +170,7 @@
     <ClInclude Include="tipos_optimizacion.h" />
     <ClInclude Include="validaciones.h" />
     <ClInclude Include="verificar_baterias.h" />
+    <ClInclude Include="verificar_conexiones_simultaneas.h" />
     <ClInclude Include="verificar_datos_algoritmo.h" />
     <ClInclude Include="verificar_datos_terminales.h" />
     <ClInclude Include="verificar_entradas.h" />

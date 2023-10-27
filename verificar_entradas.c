@@ -1,11 +1,12 @@
 #include "definiciones_globales.h"
 #include "registrar_errores.h"
 #include "verificar_baterias.h"
+#include "verificar_conexiones_simultaneas.h"
 #include "verificar_datos_algoritmo.h"
+#include "verificar_datos_terminales.h"
 #include "verificar_precios.h"
 #include "verificar_restricciones.h"
 #include "verificar_vehiculos.h"
-#include "verificar_datos_terminales.h"
 #include "tipos_optimizacion.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -64,10 +65,16 @@ int verificar_entradas(informacion_entrada_t* informacion_sistema) {
 		return ERROR;
 	}
 
-	
-	if (verificar_baterias(datos_baterias,datos_algoritmo) == ERROR) {
+
+	if (verificar_baterias(datos_baterias, datos_algoritmo) == ERROR) {
 		printf("los datos del csv de las baterias son incorrectas\n");
 		registrar_error("La informacion de las baterias es incorrecta\n", REGISTRO_ERRORES);
+		return ERROR;
+	}
+	printf("VERIFICANDO SIMULTANEIDAD \n");
+	if(verificar_simultaneidad_vehiculos_baterias(datos_vehiculos, datos_baterias) == ERROR){
+		printf("Hay problemas de simultaneidad de elementos conectados al mismo terminal al mismo tiempo\n");
+		registrar_error("Hay problemas de simultaneidad de elementos conectados al mismo terminal al mismo tiempo\n",REGISTRO_ERRORES);
 		return ERROR;
 	}
 	

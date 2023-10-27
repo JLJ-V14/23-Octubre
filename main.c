@@ -11,7 +11,6 @@
 #include "registrar_errores.h"
 #include "tipos_optimizacion.h"
 #include "verificar_entradas.h"
-
 static void ajustes_idioma() {
 
 #ifdef _WIN32
