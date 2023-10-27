@@ -11,8 +11,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	int verificar_baterias(const datos_csv_t * datos_csv_baterias, const datos_csv_t* datos_csv_algoritmo,
-		const int Numero_Filas_CSV_Baterias)
+	int verificar_baterias(const datos_csv_baterias_t* datos_csv_baterias, const datos_csv_algoritmo_t* datos_csv_algoritmo);
 
 
 #ifdef __cplusplus

@@ -82,13 +82,8 @@ int cargar_fecha(const datos_csv_t* datos_entrada, struct tm* fecha, const int c
 	// Usando errno para el manejo de errores durante la conversión
 	errno = 0;
 
-	printf("---------------------------------------------------------\n");
-	printf("%d\n", numero_fila);
-	printf("%d\n", columna_csv_anyo);
-
-	wprintf(L"%ls\n", datos_entrada->datos[numero_fila][columna_csv_anyo]);
-
 	fecha->tm_year = wcstol(datos_entrada->datos[numero_fila][columna_csv_anyo], NULL, BASE_NUMERO) - DESPLAZAMIENTO_ANYO;
+	
 	if (errno == ERANGE) {
 		return ERROR;
 	}
@@ -122,10 +117,11 @@ int cargar_fecha(const datos_csv_t* datos_entrada, struct tm* fecha, const int c
 	else {
 		fecha->tm_min = 0;
 	}
-
+	
 	if (mktime(fecha) == (time_t)-1) {
 		return ERROR;
 	}
+	
 	return EXITO;
 }
 

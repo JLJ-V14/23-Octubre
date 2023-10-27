@@ -24,7 +24,6 @@ int verificar_entradas(informacion_entrada_t* informacion_sistema) {
 
 	datos_csv_algoritmo_t* datos_algoritmo = &(informacion_sistema->datos_algoritmo);
 	datos_csv_terminales_t* datos_terminales = &(informacion_sistema->datos_terminales);
-
 	datos_csv_precio_t* datos_precio_compra = &(informacion_sistema->datos_precio_compra);
 	datos_csv_precio_t* datos_precio_venta = &(informacion_sistema->datos_precio_venta);
 	datos_csv_restricciones_t* datos_restricciones = &(informacion_sistema->datos_restricciones);
@@ -65,12 +64,12 @@ int verificar_entradas(informacion_entrada_t* informacion_sistema) {
 		return ERROR;
 	}
 
-	/*
-	if (verificar_datos_baterias(datos_baterias) == ERROR) {
+	
+	if (verificar_baterias(datos_baterias,datos_algoritmo) == ERROR) {
 		printf("los datos del csv de las baterias son incorrectas\n");
 		registrar_error("La informacion de las baterias es incorrecta\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
-	*/
+	
 	return EXITO;
 }

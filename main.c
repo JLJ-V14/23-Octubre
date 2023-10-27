@@ -69,6 +69,8 @@ int main() {
         registrar_error("Fallo las entradas son incorrectas", REGISTRO_ERRORES);
         goto fin_programa;
     }
+
+
     printf("Se han verificado las entradas\n");
     // Se libera la memoria reservada
 fin_programa:

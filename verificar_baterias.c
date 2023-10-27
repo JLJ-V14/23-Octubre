@@ -16,8 +16,8 @@
 //son correctas
 
 //Defino el numero de filas y columnas que ha de tener el csv de las baterias->
-#define minimo_filas_csv_baterias     1
-#define numero_columnas_csv_baterias 26
+#define MINIMO_FILAS_CSV_BATERIAS     1
+#define NUMERO_COLUMNAS_CSV_BATERIAS 21
 
 /*
 * En este archivo se encuentran los subprogramas que se encargan de verificar
@@ -73,7 +73,7 @@ static int comprobar_datos_bateria(const datos_csv_baterias_t* datos_bateria, co
 		registrar_error("El numero de terminal no se pudo a convertir a numero\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
-	if (convertir_a_decimal(capacidad_bateria_char, &numero_terminal_num) == ERROR) {
+	if (convertir_a_decimal(capacidad_bateria_char, &capacidad_bateria_num) == ERROR) {
 		printf("La capacidad de bateria no se pudo convertir a numero\n");
 		registrar_error("La capacidad de la bateria no se pudo convertir a numero\n", REGISTRO_ERRORES);
 		return ERROR;
@@ -241,18 +241,29 @@ static int comprobar_fecha_final_bateria(struct tm* fecha_final_bateria, const d
 	columna_csv_baterias_hora_final, columna_csv_baterias_minuto_final,
 	numero_bateria,SI_INCLUIR_MINUTO);
 
-
-	if (verificar_orden_fechas(fecha_final_algoritmo, *fecha_final_bateria,INCLUIR_FECHA_IGUAL) == ERROR) {
-		printf("la fecha final de la bateria no puede ser posterior a la del algoritmo \n");
-		registrar_error("La fecha final de la bateria no puede ser posterior a la del algoritmo\n", REGISTRO_ERRORES);
+	
+    
+	if (verificar_orden_fechas(*fecha_final_bateria,fecha_final_algoritmo,INCLUIR_FECHA_IGUAL) == ERROR) {
+		wchar_t* mensaje_error[512];
+		snprintf(mensaje_error, sizeof(mensaje_error),
+			"La fecha final de la bateria es Año %d  Mes %d Dia %d Hora %d Minuto %d "
+			"La fecha final del algoritmo es Año %d  Mes %d Dia %d Hora %d Minuto %d "
+			"La fecha final de la bateria no puede ser posterior a la del algoritmo\n",
+			fecha_final_bateria->tm_year + DESPLAZAMIENTO_ANYO, fecha_final_bateria->tm_mon + DESPLAZAMIENTO_MES, fecha_final_bateria->tm_mday,
+			fecha_final_bateria->tm_hour, fecha_final_bateria->tm_min,
+			fecha_final_algoritmo.tm_year + DESPLAZAMIENTO_ANYO, fecha_final_algoritmo.tm_mon + DESPLAZAMIENTO_MES, fecha_final_algoritmo.tm_mday,
+			fecha_final_algoritmo.tm_hour, fecha_final_algoritmo.tm_min);
+		
+		printf(mensaje_error);
+		registrar_error(mensaje_error, REGISTRO_ERRORES);
 		return ERROR;
 	}
 
 	return EXITO;
 }
 
-bool considerar_objetivo_bateria(const char* objetivo) {
-	if (strcmp("si", objetivo) == 0) {
+bool considerar_objetivo_bateria(const wchar_t*objetivo) {
+	if (wcscmp(L"si", objetivo) == 0) {
 		return true;
 	}
 	else {
@@ -270,28 +281,52 @@ static int comprobar_fecha_objetivo_baterias(const datos_csv_baterias_t* datos_b
 	int       resultado_comparacion;
 
 	//Cargo el puntero donde que apunta a la informacion donde se encuentra la informacion de la bateria
-	datos_csv_t* informacion_bateria = &(datos_baterias->informacion_baterias);
+	datos_csv_t* informacion_baterias = &(datos_baterias->informacion_baterias);
 	
 	//Cargo las columna donde se encuentra la informacion de la bateria
-	int columna_csv_baterias_anyo_objetivo = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_anyo;
-	int columna_csv_baterias_mes_objetivo = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_mes;
-	int columna_csv_baterias_dia_objetivo = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_dia;
-	int columna_csv_baterias_hora_objetivo = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_hora;
+	int columna_csv_baterias_anyo_objetivo   = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_anyo;
+	int columna_csv_baterias_mes_objetivo    = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_mes;
+	int columna_csv_baterias_dia_objetivo    = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_dia;
+	int columna_csv_baterias_hora_objetivo   = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_hora;
 	int columna_csv_baterias_minuto_objetivo = datos_baterias->posiciones_informacion_baterias.ubicacion_fecha_objetivo_baterias.columna_minuto;
 	
-	cargar_fecha(datos_baterias, &fecha_objetivo_bateria, columna_csv_baterias_anyo_objetivo,
+	cargar_fecha(informacion_baterias, &fecha_objetivo_bateria, columna_csv_baterias_anyo_objetivo,
 	columna_csv_baterias_mes_objetivo, columna_csv_baterias_dia_objetivo,
 	columna_csv_baterias_hora_objetivo, columna_csv_baterias_minuto_objetivo,
 	numero_bateria,SI_INCLUIR_MINUTO);
 
-	if (verificar_orden_fechas(fecha_objetivo_bateria, fecha_inicial_bateria,INCLUIR_FECHA_IGUAL) == ERROR) {
-		printf("la fecha final de la bateria no puede ser posterior a la del algoritmo\n");
-		registrar_error("La fecha final de la bateria no puede ser posterior a la del algoritmo\n",REGISTRO_ERRORES);
+	
+	if (verificar_orden_fechas(fecha_inicial_bateria, fecha_objetivo_bateria,INCLUIR_FECHA_IGUAL) == ERROR) {
+		char mensaje_error[512];
+		snprintf(mensaje_error, sizeof(mensaje_error),"La fecha objetivo de la bateria no puede ser anterior a la fecha inicial de la bateria \n"
+			    "La fecha objetivo de la bateria es Anyo %d Mes %d Dia %d Hora %d Minuto %d \n"
+		        "La fecha inicial  de la bateria es Anyo %d Mes %d Dia %d Hora %d Minuto %d \n",
+			    fecha_objetivo_bateria.tm_year, fecha_objetivo_bateria.tm_mon,
+			    fecha_objetivo_bateria.tm_mday, fecha_objetivo_bateria.tm_hour,
+			    fecha_objetivo_bateria.tm_min,
+			    fecha_inicial_bateria.tm_year,  fecha_inicial_bateria.tm_mon,
+			    fecha_inicial_bateria.tm_mday,  fecha_inicial_bateria.tm_hour,
+			    fecha_inicial_bateria.tm_min
+		);
+		printf(mensaje_error);
+		registrar_error(mensaje_error,REGISTRO_ERRORES);
 		return ERROR;
 	}
-	if (verificar_orden_fechas(fecha_final_bateria, fecha_objetivo_bateria,INCLUIR_FECHA_IGUAL) == ERROR) {
-		printf("La fecha final de la bateria no puede ser posterior a la del algoritmo \n");
-		registrar_error("La fecha final de la bateria no puede ser posterior a la del algoritmo\n", REGISTRO_ERRORES);
+	
+	if (verificar_orden_fechas(fecha_objetivo_bateria, fecha_final_bateria,INCLUIR_FECHA_IGUAL) == ERROR) {
+		char mensaje_error[512];
+		snprintf(mensaje_error, sizeof(mensaje_error), "La fecha objetivo de la bateria no puede ser anterior a la fecha inicial de la bateria\n"
+			"La fecha objetivo de la bateria es Año %d Mes %d Dia %d Hora %d Minuto %d \n"
+			"La fecha inicial  de la bateria es Año %d Mes %d Dia %d Hora %d Minuto %d \n",
+			fecha_objetivo_bateria.tm_year + DESPLAZAMIENTO_ANYO, fecha_objetivo_bateria.tm_mon +DESPLAZAMIENTO_MES,
+			fecha_objetivo_bateria.tm_mday, fecha_objetivo_bateria.tm_hour,
+			fecha_objetivo_bateria.tm_min,
+			fecha_final_bateria.tm_year +  DESPLAZAMIENTO_ANYO, fecha_final_bateria.tm_mon + DESPLAZAMIENTO_MES,
+			fecha_final_bateria.tm_mday, fecha_final_bateria.tm_hour,
+			fecha_final_bateria.tm_min);
+		
+		printf(mensaje_error);
+		registrar_error(mensaje_error, REGISTRO_ERRORES);
 		return ERROR;
 	}
 
@@ -313,7 +348,10 @@ static int comprobar_fecha_baterias(const int numero_bateria, const datos_csv_ba
 	struct tm fecha_objetivo_bateria;
 	int       variable_control;
 
-	//Cargo el puntero que apunta a la posicion de la memoria donde se encuentr 
+	//Cargo las posiciones donde se encuentran algunas informaciones del csv
+	int columna_objetivo= datos_baterias->posiciones_informacion_baterias.columna_consideracion_objetivo;
+	//Cargo el puntero que apunta a la posicion de la memoria donde se encuentra la informacion de las baterias
+	datos_csv_t* informacion_baterias = &(datos_baterias->informacion_baterias);
 
 	//Se comprueba si la fecha inicial de la bateria es correcta
 	if (comprobar_fecha_inicial_bateria(&fecha_inicial_bateria, datos_baterias, numero_bateria, datos_algoritmo) == ERROR) {
@@ -332,19 +370,25 @@ static int comprobar_fecha_baterias(const int numero_bateria, const datos_csv_ba
 		registrar_error(mensaje_error, REGISTRO_ERRORES);
 		return ERROR;
 	}
-
+	
+	
 	//Se comprueba que la fecha inicial de la bateria es anterior a la de finalizacion.
-	if (verificar_orden_fechas(fecha_final_bateria, fecha_inicial_bateria) == ERROR) {
-		printf("error la fecha inicial de carga de la bateria no puede ser posterior a la fecha final de carga \n");
+	if (verificar_orden_fechas(fecha_inicial_bateria, fecha_final_bateria,INCLUIR_FECHA_IGUAL) == ERROR) {
+		printf("Error la fecha inicial de carga de la bateria no puede ser posterior a la fecha final de carga\n");
+		registrar_error("Error la fecha inicial de carga de la bateria no puede ser posterior a la fecha final de carga\n", REGISTRO_ERRORES);
 		return ERROR;
 	}
 
 	//Se revisa si para la bateria en cuestion se desea si se desea que tenga un cierto nivel de carga para alguna
 	//fecha en particular.
-	if (considerar_objetivo_bateria(datos_baterias[numero_bateria][columna_csv_baterias_objetivo_carga]->data.str)) {
+	printf("La fila que está siendo accedida es %d", numero_bateria);
+	printf("La columna que está siendo accedida es %d", columna_objetivo);
+	if (considerar_objetivo_bateria(informacion_baterias->datos[numero_bateria][columna_objetivo])==ERROR) {
 
 	//Se comprueba que la fecha objetivo de carga de la bateria sea correcta.
-		if (comprobar_fecha_objetivo_baterias(datos_baterias, numero_bateria, fecha_inicial_bateria, fecha_final_bateria) == error) {
+		if (comprobar_fecha_objetivo_baterias(datos_baterias, numero_bateria, fecha_inicial_bateria, fecha_final_bateria) == ERROR) {
+			printf("La fecha objetivo de carga de la bateria no es correcta\n");
+			registrar_error("La fecha objetivo de carga de la bateria no es correcta\n",REGISTRO_ERRORES);
 			return ERROR;
 		}
 
@@ -358,13 +402,13 @@ static int comprobar_fecha_baterias(const int numero_bateria, const datos_csv_ba
 */
 static int verificar_encabezados_baterias(datos_csv_t* datos_baterias) {
 
-	const wchar_t* valores_aceptables[] = { L"Terminal",L"Capacidad Bateria",L"Bateria Inicial ",
+	const wchar_t* valores_aceptables[] = { L"Terminal",L"Capacidad Bateria",L"Bateria Inicial",
 										   L"Bateria Final",L"Maxima Potencia",L"Año Inicial",
 										   L"Mes Inicial",L"Dia Inicial",L"Hora Inicial",
 										   L"Minuto Inicial",L"Año Final",L"Mes Final",
 										   L"Dia Final",L"Hora Final",L"Minuto Final",
 										   L"¿Considerar Objetivo?",L"Año Objetivo",
-	                                       L"Mes Objetivo",L"Dia Objetivo",L"Hora Objetivo"
+	                                       L"Mes Objetivo",L"Dia Objetivo",L"Hora Objetivo",
 	                                       L"Minuto Objetivo"};
 
 	const int numero_encabezados = sizeof(valores_aceptables) / sizeof(valores_aceptables[0]);
@@ -396,8 +440,8 @@ int verificar_baterias(const datos_csv_baterias_t* datos_csv_baterias, const dat
 
 	//Se comprueba las dimensiones del csv de las baterias
 
-	if (comprobar_dimensiones_csv_variable(informacion_baterias, minimo_filas_csv_baterias,
-		numero_columnas_csv_baterias, "baterias") == ERROR) {
+	if (comprobar_dimensiones_csv_variable(informacion_baterias, MINIMO_FILAS_CSV_BATERIAS,
+		NUMERO_COLUMNAS_CSV_BATERIAS, "baterias") == ERROR) {
 		printf("error en las dimensiones del csv de las baterias\n");
 		registrar_error("error en las dimensiones del csv de las baterias", REGISTRO_ERRORES);
 		return ERROR;

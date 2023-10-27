@@ -64,6 +64,11 @@
 #define COLUMNA_CSV_BATERIAS_HORA_FINAL          13
 #define COLUMNA_CSV_BATERIAS_MINUTO_FINAL        14
 #define COLUMNA_CSV_BATERIAS_CONSIDERAR_OBJETIVO 15
+#define COLUMNA_CSV_BATERIAS_ANYO_OBJETIVO       16
+#define COLUMNA_CSV_BATERIAS_MES_OBJETIVO        17
+#define COLUMNA_CSV_BATERIAS_DIA_OBJETIVO        18
+#define COLUMNA_CSV_BATERIAS_HORA_OBJETIVO       19 
+#define COLUMNA_CSV_BATERIAS_MINUTO_OBJETIVO     20
 
 /*Filas y columnas donde se encuentra la informacion csv de las restricciones*/
 #define FILA_CSV_RESTRICCIONES_ENCABEZADOS                 0
@@ -194,13 +199,19 @@ static void inicializar_ubicacion_informacion_baterias(ubicacion_csv_baterias_t*
     ubicacion_baterias->ubicacion_fecha_inicial_baterias.columna_minuto = COLUMNA_CSV_BATERIAS_MINUTO_INICIAL;
 
     //Se registran las columnas relacionadas con la fecha final de las baterias
-    ubicacion_baterias->ubicacion_fecha_final_baterias.columna_minuto = COLUMNA_CSV_BATERIAS_MINUTO_FINAL;
     ubicacion_baterias->ubicacion_fecha_final_baterias.columna_anyo = COLUMNA_CSV_BATERIAS_ANYO_FINAL;
     ubicacion_baterias->ubicacion_fecha_final_baterias.columna_mes = COLUMNA_CSV_BATERIAS_MES_FINAL;
     ubicacion_baterias->ubicacion_fecha_final_baterias.columna_dia = COLUMNA_CSV_BATERIAS_DIA_FINAL;
     ubicacion_baterias->ubicacion_fecha_final_baterias.columna_hora = COLUMNA_CSV_BATERIAS_HORA_FINAL;
     ubicacion_baterias->ubicacion_fecha_final_baterias.columna_minuto = COLUMNA_CSV_BATERIAS_MINUTO_FINAL;
 
+    //Se registran las columnas relacionadas con la fecha objetivo de carga de la bateria
+    ubicacion_baterias->columna_consideracion_objetivo = COLUMNA_CSV_BATERIAS_CONSIDERAR_OBJETIVO;
+    ubicacion_baterias->ubicacion_fecha_objetivo_baterias.columna_anyo = COLUMNA_CSV_BATERIAS_ANYO_OBJETIVO;
+    ubicacion_baterias->ubicacion_fecha_objetivo_baterias.columna_mes = COLUMNA_CSV_BATERIAS_MES_OBJETIVO;
+    ubicacion_baterias->ubicacion_fecha_objetivo_baterias.columna_dia = COLUMNA_CSV_BATERIAS_DIA_OBJETIVO;
+    ubicacion_baterias->ubicacion_fecha_objetivo_baterias.columna_hora = COLUMNA_CSV_BATERIAS_HORA_OBJETIVO;
+    ubicacion_baterias->ubicacion_fecha_objetivo_baterias.columna_minuto = COLUMNA_CSV_BATERIAS_MINUTO_OBJETIVO;
 }
 
 

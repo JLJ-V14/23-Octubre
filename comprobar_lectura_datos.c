@@ -48,6 +48,7 @@ static void comprobar_datos(FILE* comprobacion_datos, datos_csv_t* datos) {
 				fwprintf(comprobacion_datos, L",");
 			}
 		}
+		fwprintf(comprobacion_datos,L"\n");
 
 	}
 
