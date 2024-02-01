@@ -8,6 +8,7 @@
 #include "leer_entradas.h"
 #include "liberar_memoria.h"
 #include "main.h"
+#include "osqp.h"
 #include "registrar_errores.h"
 #include "tipos_optimizacion.h"
 #include "verificar_entradas.h"
@@ -33,7 +34,7 @@ int main() {
 
     // Se asume éxito inicialmente.
     int estado = EXITO;
-
+    OSQPInt A_nnz = 4;
     //Se establece como idioma el español.
     ajustes_idioma();
 
@@ -48,19 +49,20 @@ int main() {
     }
 
     //Se pasa a leer los datos de entrada->
-
     if (leer_entradas(&informacion_sistema) == ERROR) {
         printf("Fallo en la lectura de las entradas\n");
         registrar_error("Fallo en la lectura de los datos de entrada", REGISTRO_ERRORES);
         goto fin_programa;
     }
-    //Se inspecciona si la lectura se esta haciendo adecuadamente
 
+    //Se inspecciona si la lectura se esta haciendo adecuadamente
     if (comprobar_informacion_entrada(&informacion_sistema) == ERROR) {
         printf("Fallo en la comprobacion de la informacion de entrada\n");
         registrar_error("Fallo en la comprobacion de la informacion de entrada", REGISTRO_ERRORES);
         goto fin_programa;
     }
+
+
 
     //Se verifica que la informacion de entrada es correcta
     if (verificar_entradas(&informacion_sistema) == ERROR) {
@@ -69,10 +71,13 @@ int main() {
         goto fin_programa;
     }
 
-
     printf("Se han verificado las entradas\n");
     // Se libera la memoria reservada
-fin_programa:
+
+    
+
+
+    fin_programa:
     liberar_memoria_csvs(&informacion_sistema);
 
 
